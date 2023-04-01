@@ -23,6 +23,10 @@ const UserSchema = new Schema ({
         type: String,
         required: true 
     },
+    img: {
+        type: String,
+        require: true
+    },
     active: {
         type: Boolean,
         required: true
