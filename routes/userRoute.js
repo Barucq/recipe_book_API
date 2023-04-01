@@ -19,6 +19,20 @@ routes.get("/", async(req, res) => {
     }
 });
 
+routes.get("/:id", async(req, res)=> {
+    const connection = await mongoose.createConnection(dburl);
+    try{
+        const UserModel = UserModelCreator(connection);
+        const data = await UserModel.findOne({"_id":req.params.id});
+        res.json(data);
+        connection.close();
+    }catch(error){
+        connection.close();
+        res.status(500);
+        res.json({message: "error", error:error});
+    }
+});
+
 routes.post("/", async(req, res) => {
     const connection = await mongoose.createConnection(dburl);
     try{
